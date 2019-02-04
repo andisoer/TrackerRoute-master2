@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">TrackerRoute</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="senin">Senin</string>
+    <string name="selasa">Selasa</string>
+    <string name="rabu">Rabu</string>
+    <string name="kamis">Kamis</string>
+    <string name="jumat">Jumat</string>
+    <string name="sabtu">Sabtu</string>
+    <string name="minggu">Minggu</string>
+
+    <string name="material_calendar_monday">S</string>
+    <string name="material_calendar_tuesday">S</string>
+    <string name="material_calendar_wednesday">R</string>
+    <string name="material_calendar_thursday">K</string>
+    <string name="material_calendar_friday">J</string>
+    <string name="material_calendar_saturday">S</string>
+    <string name="material_calendar_sunday">M</string>
+
+    <array name="material_calendar_months_array">
+        <item>Januari</item>
+        <item>Februari</item>
+        <item>Maret</item>
+        <item>April</item>
+        <item>Mei</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Agustus</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Desember</item>
+    </array>
+
+    <string name="material_calendar_today_button">Today</string>
+    <string name="material_calendar_positive_button">OK</string>
+    <string name="material_calendar_negative_button">Cancel</string>
+
+</resources>
