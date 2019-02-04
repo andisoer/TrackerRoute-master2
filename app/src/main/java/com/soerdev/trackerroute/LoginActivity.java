@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     private String KEY_USERNAME = "username";
     private String KEY_PASS = "password";
 
-
     ConnectivityManager connectivityManager;
 
     int success;
@@ -127,7 +126,6 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.show();
             loginAkun();
         }
-
     }
 
     private void loginAkun () {
