@@ -76,6 +76,8 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
     private String TAG_nama = "nama";
     private String WAKTU_MASUK = "pklawal";
     private String WAKTU_KELUAR = "pklakhir";
+    private String TAG_WAKTU_AWAL = "waktu_awal";
+    private String TAG_WAKTU_AKHIR = "waktu_akhir";
 
     private String URL_POST_USERNAME = "https://sembarangsims.000webhostapp.com/backSims/select_absensi.php";
     private String URL_GET_KORDINAT = "https://sembarangsims.000webhostapp.com/backSims/select_koordinat.php";
@@ -90,7 +92,7 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
 
     SwipeRefreshLayout refreshLayout;
 
-    TextView cobak, testKoordinat, awalTestKoordinat, akhirTestKoordinat;
+    TextView cobak, testKoordinat, awalTestKoordinat, akhirTestKoordinat, forToday;
 
     int success;
 
@@ -119,6 +121,9 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
         testKoordinat = findViewById(R.id.testKoordinat);
         awalTestKoordinat = findViewById(R.id.awalTestKoordinat);
         akhirTestKoordinat = findViewById(R.id.akhirTestKoordinat);
+        forToday = findViewById(R.id.forToday);
+
+        forToday.setText("Rekapan Untuk "+caritanggal);
 
         refreshLayout = findViewById(R.id.swipe_rl);
 
@@ -228,7 +233,7 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
             protected Map<String, String>getParams(){
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put(TAG_kodeunik, varUsernameNow+kodeunik);
+                params.put(TAG_kodeunik, kodeunik);
 
                 Log.e(TAG, ""+params);
 
@@ -289,8 +294,8 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
                             ModelListAbsen item = new ModelListAbsen();
 
                             item.setUsername(obj.getString(TAG_USERNAME));
-                            item.setWaktu_awal(obj.getString(WAKTU_MASUK));
-                            item.setWaktu_akhir(obj.getString(WAKTU_KELUAR));
+                            item.setWaktu_awal(obj.getString(TAG_WAKTU_AWAL));
+                            item.setWaktu_akhir(obj.getString(TAG_WAKTU_AKHIR));
                             item.setDate(obj.getString(TAG_DATE));
                             item.setKodeUnik(obj.getString(TAG_UNIQUE_CODE));
 
@@ -340,56 +345,5 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
         postUsername();
     }
 
-    /*
-    public class AdapterListAbsen2 extends RecyclerView.Adapter<AdapterListAbsen2.ViewHolder>{
-
-        private List<ModelListAbsen> modelListAbsens;
-        private Context context;
-
-        public AdapterListAbsen2(Context context, List<ModelListAbsen> modelListAbsenArrayList) {
-            this.modelListAbsens = modelListAbsenArrayList;
-            this.context = context;
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_absen, null);
-
-            ViewHolder viewHolder = new ViewHolder(mView);
-
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            ModelListAbsen mLA = modelListAbsens.get(position);
-
-            holder.username.setText(String.valueOf(mLA.getUsername()));
-            holder.tanggalAbsen.setText(String.valueOf(mLA.getDate()));
-            holder.kordinatAwal.setText(String.valueOf(mLA.getAwal()));
-            holder.kordinatAkhir.setText(String.valueOf(mLA.getAkhir()));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 0;
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-
-            TextView username, tanggalAbsen, kordinatAwal, kordinatAkhir;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-
-                username = (TextView)itemView.findViewById(R.id.userName);
-                tanggalAbsen = (TextView)itemView.findViewById(R.id.tanggalAbsen);
-                kordinatAwal = (TextView)itemView.findViewById(R.id.awalKoordinat);
-                kordinatAkhir = (TextView)itemView.findViewById(R.id.akhirKoordinat);
-            }
-        }
-    }
-    */
 }
 

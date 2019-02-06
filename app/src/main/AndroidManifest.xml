@@ -49,7 +49,7 @@
         <activity android:name=".DaftarActivity" />
         <activity
             android:name=".RekapAbsenActivity"
-            android:parentActivityName=".halpilih" />
+            android:parentActivityName=".CompactCalendar" />
         <activity android:name=".halpilih" />
         <activity
             android:name=".CekKoordinat"

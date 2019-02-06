@@ -48,6 +48,7 @@ public class CompactCalendar extends AppCompatActivity {
     List<ModelKalendarAbsen> absenList = new ArrayList<ModelKalendarAbsen>();
 
     private SimpleDateFormat SDFcurrentMonth = new SimpleDateFormat("MMMM - yyyy", Locale.getDefault());
+    private SimpleDateFormat SDFonClickDay = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
     CompactCalendarView compactCalendarView;
 
@@ -57,6 +58,7 @@ public class CompactCalendar extends AppCompatActivity {
     private String TAG_USERNAME = "userName";
     private String TAG_DATE = "date";
     private String varUsernameNow;
+    private String onClickTanggalCalendar;
 
     private String URL_POST = "https://sembarangsims.000webhostapp.com/backSims/select_date.php";
 
@@ -88,7 +90,8 @@ public class CompactCalendar extends AppCompatActivity {
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-
+                onClickTanggalCalendar = SDFonClickDay.format(dateClicked);
+                Toast.makeText(CompactCalendar.this, onClickTanggalCalendar, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -100,7 +103,8 @@ public class CompactCalendar extends AppCompatActivity {
         pilihTanggalKalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CompactCalendar.this, halpilih.class);
+                Intent intent = new Intent(CompactCalendar.this, RekapAbsenActivity.class);
+                intent.putExtra("cari", onClickTanggalCalendar);
                 startActivity(intent);
             }
         });

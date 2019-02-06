@@ -52,7 +52,6 @@ public class AdapterAbsenList extends BaseAdapter {
         TextView tanggalAbsen = (TextView)view.findViewById(R.id.tanggalAbsen);
         TextView kordinatAwal = (TextView)view.findViewById(R.id.awalKoordinat);
         TextView kordinatAkhir = (TextView)view.findViewById(R.id.akhirKoordinat);
-        TextView unikKode = (TextView)view.findViewById(R.id.unikKode);
 
         ModelListAbsen modelListAbsen = data.get(position);
 
@@ -60,7 +59,6 @@ public class AdapterAbsenList extends BaseAdapter {
         tanggalAbsen.setText(modelListAbsen.getDate());
         kordinatAwal.setText("Waktu Masuk : "+modelListAbsen.getWaktu_awal());
         kordinatAkhir.setText("Waktu Keluar : "+modelListAbsen.getWaktu_akhir());
-        unikKode.setText(modelListAbsen.getKodeUnik());
 
         return view;
     }
