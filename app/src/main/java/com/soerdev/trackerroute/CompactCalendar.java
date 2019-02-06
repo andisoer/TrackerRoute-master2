@@ -2,6 +2,7 @@ package com.soerdev.trackerroute;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.nfc.Tag;
@@ -9,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +41,7 @@ import java.util.Map;
 public class CompactCalendar extends AppCompatActivity {
 
     TextView currentMonth;
+    Button pilihTanggalKalendar;
 
     SharedPreferences sharedPreferences;
 
@@ -68,11 +72,11 @@ public class CompactCalendar extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        pilihTanggalKalendar = findViewById(R.id.pilihTanggalCalendar);
+
         sharedPreferences = getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
 
         varUsernameNow = (sharedPreferences.getString(TAG_username, ""));
-
-        Toast.makeText(CompactCalendar.this, varUsernameNow, Toast.LENGTH_SHORT).show();
 
         currentMonth = findViewById(R.id.currentMonthXML);
 
@@ -90,6 +94,14 @@ public class CompactCalendar extends AppCompatActivity {
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
                 currentMonth.setText(SDFcurrentMonth.format(firstDayOfNewMonth));
+            }
+        });
+
+        pilihTanggalKalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CompactCalendar.this, halpilih.class);
+                startActivity(intent);
             }
         });
 

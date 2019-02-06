@@ -53,4 +53,12 @@
         android:paddingLeft="12dp"
         app:compactCalendarTextSize="13dp"/>
 
+    <Button
+        android:id="@+id/pilihTanggalCalendar"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pilih Tanggal"
+        android:layout_gravity="center_horizontal"/>
+
 </LinearLayout>

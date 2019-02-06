@@ -58,8 +58,8 @@ public class AdapterAbsenList extends BaseAdapter {
 
         username.setText(modelListAbsen.getUsername());
         tanggalAbsen.setText(modelListAbsen.getDate());
-        kordinatAkhir.setText(modelListAbsen.getAkhir());
-        kordinatAwal.setText(modelListAbsen.getAwal());
+        kordinatAwal.setText("Waktu Masuk : "+modelListAbsen.getWaktu_awal());
+        kordinatAkhir.setText("Waktu Keluar : "+modelListAbsen.getWaktu_akhir());
         unikKode.setText(modelListAbsen.getKodeUnik());
 
         return view;

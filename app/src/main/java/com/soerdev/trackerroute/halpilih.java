@@ -58,7 +58,6 @@ public class halpilih extends AppCompatActivity {
 
                 }
             });
-
     }
 
     private void tanggalan() {

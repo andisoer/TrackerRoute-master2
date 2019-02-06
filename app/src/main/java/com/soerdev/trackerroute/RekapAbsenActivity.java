@@ -73,6 +73,9 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
     private String TAG_DATE = "date";
     private String TAG_daTe = "daTe";
     private String TAG_kodeunik = "kodeunik";
+    private String TAG_nama = "nama";
+    private String WAKTU_MASUK = "pklawal";
+    private String WAKTU_KELUAR = "pklakhir";
 
     private String URL_POST_USERNAME = "https://sembarangsims.000webhostapp.com/backSims/select_absensi.php";
     private String URL_GET_KORDINAT = "https://sembarangsims.000webhostapp.com/backSims/select_koordinat.php";
@@ -111,7 +114,7 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
         sharedPreferences = getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
 
         varUserUidNow = (sharedPreferences.getInt(TAG_ID, 0));
-        varUsernameNow = (sharedPreferences.getString(TAG_NAMA, ""));
+        varUsernameNow = (sharedPreferences.getString(TAG_USERNAME, ""));
         //cobak = findViewById(R.id.cobak);
         testKoordinat = findViewById(R.id.testKoordinat);
         awalTestKoordinat = findViewById(R.id.awalTestKoordinat);
@@ -286,8 +289,8 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
                             ModelListAbsen item = new ModelListAbsen();
 
                             item.setUsername(obj.getString(TAG_USERNAME));
-                            item.setAwal(obj.getString(TAG_KOORDINAT_AWAL));
-                            item.setAkhir(obj.getString(TAG_KOORDINAT_AKHIR));
+                            item.setWaktu_awal(obj.getString(WAKTU_MASUK));
+                            item.setWaktu_akhir(obj.getString(WAKTU_KELUAR));
                             item.setDate(obj.getString(TAG_DATE));
                             item.setKodeUnik(obj.getString(TAG_UNIQUE_CODE));
 
@@ -320,6 +323,7 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put(TAG_daTe, caritanggal);
+                params.put(TAG_nama, varUsernameNow);
 
                 Log.e(TAG, ""+params);
 
@@ -327,123 +331,6 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
             }
         };
         AppController.getInstance().addToRequestQueue(stringRequest);
-        /*
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL_POST_USERNAME, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                //Log.e(TAG, response.toString());
-                Log.i("tagconvertstr", "["+response.toString()+"]");
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject obj = response.getJSONObject(i);
-
-                        ModelListAbsen item = new ModelListAbsen();
-
-                        item.setUsername(obj.getString(TAG_USERNAME));
-                        item.setAwal(obj.getString(TAG_KOORDINAT_AWAL));
-                        item.setAkhir(obj.getString(TAG_KOORDINAT_AKHIR));
-                        item.setDate(obj.getString(TAG_DATE));
-
-                        listAbsen.add(item);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(RekapAbsenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-                adapter.notifyDataSetChanged();
-                refreshLayout.setRefreshing(false);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Error: " + error.getMessage());
-                Toast.makeText(RekapAbsenActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String>getParams(){
-                Date currentDate = Calendar.getInstance().getTime();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
-                String tanggal = simpleDateFormat.format(currentDate);
-
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put(TAG_daTe, tanggal);
-
-                Log.e(TAG, ""+params);
-
-                return params;
-            }
-        };
-
-        AppController.getInstance().addToRequestQueue(jsonArrayRequest);
-        /*
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_POST_USERNAME, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e(TAG, "Response : " + response.toString());
-
-                try {
-
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray dataArray = jsonObject.getJSONArray("data");
-
-                    for (int i = 0; i < dataArray.length(); i++) {
-                        JSONObject object = dataArray.getJSONObject(i);
-
-                        String username = object.getString(TAG_USERNAME);
-                        String awal = object.getString(TAG_KOORDINAT_AWAL);
-                        String akhir = object.getString(TAG_KOORDINAT_AKHIR);
-                        String date = object.getString(TAG_DATE);
-
-                        jsonResponse = "";
-                        jsonResponse += "Username : " +username+"\n";
-                        jsonResponse += "Awal : "+awal+"\n";
-                        jsonResponse += "Akhir : "+akhir+"\n";
-                        jsonResponse += "Tanggal : "+date+"\n";
-
-                        cobak.setText(jsonResponse);
-
-                        ModelListAbsen modelAbsen = new ModelListAbsen();
-                        modelAbsen.setId(object.getString(TAG_ID));
-                        modelAbsen.setUsername(object.getString(TAG_USERNAME));
-                        modelAbsen.setKodeUnik(object.getString(TAG_UNIQUE_CODE));
-                        modelAbsen.setLink_gambar(object.getString(TAG_LINK_IMAGE));
-                        modelAbsen.setAwal(object.getString(TAG_KOORDINAT_AWAL));
-                        modelAbsen.setAkhir(object.getString(TAG_KOORDINAT_AKHIR));
-                        modelAbsen.setId_device(object.getString(TAG_ID_DEVICE));
-                        modelAbsen.setDate(object.getString(TAG_DATE));
-
-                        listAbsen.add(modelAbsen);
-
-                        listAbsen.add(new ModelListAbsen(
-                                object.getString(TAG_ID),
-                                object.getString(TAG_USERNAME),
-                                object.getString(TAG_UNIQUE_CODE),
-                                object.getString(TAG_LINK_IMAGE),
-                                object.getString(TAG_KOORDINAT_AWAL),
-                                object.getString(TAG_KOORDINAT_AKHIR),
-                                object.getString(TAG_ID_DEVICE),
-                                object.getString(TAG_DATE)
-                        ));
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(RekapAbsenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-                adapter.notifyDataSetChanged();
-                refreshLayout.setRefreshing(false);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        AppController.getInstance().addToRequestQueue(stringRequest);
-        */
     }
 
     @Override

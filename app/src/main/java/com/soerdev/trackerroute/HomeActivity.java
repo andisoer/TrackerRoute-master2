@@ -72,6 +72,8 @@ public class HomeActivity extends AppCompatActivity {
     private String TAG_IMG_ABSEN = "image";
     private String TAG_MESSAGE = "message";
     private String TAG_DEVICE_ID = "id_device";
+    private String WAKTU_MASUK = "pklawal";
+    private String WAKTU_KELUAR = "pklakhir";
 
     private String TAG = HomeActivity.class.getSimpleName();
     private String counterTime;
@@ -207,12 +209,15 @@ public class HomeActivity extends AppCompatActivity {
                         //disabledBtn();
                         absenOut.setClickable(false);
                         absenOut.setEnabled(false);
+                        count = 61;
 
                     } else {
+                        progressDialog.dismiss();
                         Toast.makeText(HomeActivity.this, jsonObject.getString(TAG_MESSAGE), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    progressDialog.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -226,13 +231,15 @@ public class HomeActivity extends AppCompatActivity {
             protected Map<String, String>getParams(){
                 String koordinat = latti+", "+longi;
                 Date currentTime = Calendar.getInstance().getTime();
+                SimpleDateFormat formatWaktu = new SimpleDateFormat("HH:mm:ss");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
                 String tanggal = simpleDateFormat.format(currentTime);
+                String waktuAkhir = formatWaktu.format(currentTime);
 
                 Map<String, String> params = new HashMap<String, String>();
                 params.put(TAG_KODE_UNIK, varUserNameNow + tanggal);
                 params.put(TAG_KOORDINAT_AKHIR, koordinat);
-
+                params.put(WAKTU_KELUAR, waktuAkhir);
                 Log.e(TAG, "" + params);
 
                 return params;
@@ -298,7 +305,7 @@ public class HomeActivity extends AppCompatActivity {
                         dialog.dismiss();
                     } else {
                         Toast.makeText(HomeActivity.this, jsonObject.getString(TAG_MESSAGE), Toast.LENGTH_SHORT).show();
-
+                        dialog.dismiss();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -320,7 +327,11 @@ public class HomeActivity extends AppCompatActivity {
 
                 Date currentDate = Calendar.getInstance().getTime();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                SimpleDateFormat formatWaktu = new SimpleDateFormat("HH:mm:ss");
                 String tanggal = simpleDateFormat.format(currentDate);
+                String waktuAwal = formatWaktu.format(currentDate);
+
+
 
                 String nol = Integer.toString(0);
                 Map<String, String> params = new HashMap<String, String>();
@@ -332,6 +343,8 @@ public class HomeActivity extends AppCompatActivity {
                 params.put(TAG_KOORDINAT_AKHIR, nol);
                 params.put(TAG_DEVICE_ID, deviceID);
                 params.put(TAG_WAKTU, tanggal);
+                params.put(WAKTU_MASUK, waktuAwal);
+                params.put(WAKTU_KELUAR, nol);
                 Log.e(TAG, ""+params);
 
                 return params;

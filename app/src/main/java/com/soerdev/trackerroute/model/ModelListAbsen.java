@@ -2,13 +2,13 @@ package com.soerdev.trackerroute.model;
 
 public class ModelListAbsen {
 
-    private String id, username, kodeUnik, link_gambar, awal, akhir, id_device, date;
+    private String id, username, kodeUnik, link_gambar, awal, akhir, id_device, date, waktu_awal, waktu_akhir;
 
     public ModelListAbsen() {
 
     }
 
-    public ModelListAbsen(String id, String username, String kodeUnik, String link_gambar, String awal, String akhir, String id_device, String date) {
+    public ModelListAbsen(String id, String username, String kodeUnik, String link_gambar, String awal, String akhir, String id_device, String date, String waktu_awal, String waktu_akhir) {
         this.id = id;
         this.username = username;
         this.kodeUnik = kodeUnik;
@@ -17,6 +17,8 @@ public class ModelListAbsen {
         this.akhir = akhir;
         this.id_device = id_device;
         this.date = date;
+        this.waktu_awal = waktu_awal;
+        this.waktu_akhir = waktu_akhir;
     }
 
     public String getId() {
@@ -81,5 +83,21 @@ public class ModelListAbsen {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getWaktu_awal() {
+        return waktu_awal;
+    }
+
+    public void setWaktu_awal(String waktu_awal) {
+        this.waktu_awal = waktu_awal;
+    }
+
+    public String getWaktu_akhir() {
+        return waktu_akhir;
+    }
+
+    public void setWaktu_akhir(String waktu_akhir) {
+        this.waktu_akhir = waktu_akhir;
     }
 }
