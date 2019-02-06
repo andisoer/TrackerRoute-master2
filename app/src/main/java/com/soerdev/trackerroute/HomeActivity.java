@@ -66,7 +66,6 @@ public class HomeActivity extends AppCompatActivity {
     private String TAG_KOORDINAT = "koordinat";
     private String TAG_WAKTU = "date";
     private String TAG_SUCESS = "success";
-    private String TAG_IMG_COLUMN = "link_foto";
     private String TAG_UNIQUE_CODE = "kodeRHS";
     private String TAG_KODE_UNIK = "kodeUnik";
     private String TAG_IMG_ABSEN = "image";
@@ -74,6 +73,7 @@ public class HomeActivity extends AppCompatActivity {
     private String TAG_DEVICE_ID = "id_device";
     private String WAKTU_MASUK = "pklawal";
     private String WAKTU_KELUAR = "pklakhir";
+    private String TAG_LINK_FOTO = "link_foto";
 
     private String TAG = HomeActivity.class.getSimpleName();
     private String counterTime;
@@ -91,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
 
     LocationManager locationManager;
 
-    Uri Fileurl, gmmIntentUri;
+    Uri Fileurl;
 
     Thread t;
 
@@ -136,7 +136,7 @@ public class HomeActivity extends AppCompatActivity {
         imageUser = findViewById(R.id.imageView);
         rekap = findViewById(R.id.rekap);
         counter = findViewById(R.id.counter);
-        namaUser = findViewById(R.id.textView2);
+        namaUser = findViewById(R.id.userNameHome);
 
         Toast.makeText(getApplicationContext(), "Selamat Datang " + varUserNameNow, Toast.LENGTH_SHORT).show();
 
@@ -185,7 +185,8 @@ public class HomeActivity extends AppCompatActivity {
                 */
             }
         });
-        //selectIMAGEfromUser();
+
+        selectIMAGEfromUser();
 
         disabledBtn();
     }
@@ -487,12 +488,11 @@ public class HomeActivity extends AppCompatActivity {
                 Log.e(TAG, "Response: " + response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    //success = jsonObject.getInt(TAG_SUCESS);
 
-                    /*if (success == 1) {
-                        Log.e("Registration Success !", jsonObject.toString());
+                    Glide.with(HomeActivity.this).load(jsonObject.getString(TAG_LINK_FOTO)).into(imageUser);
+                    namaUser.setText(jsonObject.getString(TAG_USERNAME));
 
-                    }*/
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

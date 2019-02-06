@@ -7,23 +7,25 @@
     tools:context=".HomeActivity"
     android:background="@drawable/home_bg">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
-        android:layout_width="146dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:background="@color/colorGreyAnother"
-        android:scaleType="fitCenter"
+        android:src="@drawable/ic_action_person"
+        android:scaleType="centerCrop"
+        app:civ_border_color="@android:color/white"
+        app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/userNameHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -32,14 +34,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Nama User"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/absenIn"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -47,8 +49,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
-        android:paddingLeft="60dp"
-        android:paddingRight="60dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:text="Absen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +58,7 @@
 
     <Button
         android:id="@+id/absenOut"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -64,8 +66,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
-        android:paddingLeft="60dp"
-        android:paddingRight="60dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:text="Keluar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +105,7 @@
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/userNameHome"
         android:textColor="#ffffff"/>
 
 </android.support.constraint.ConstraintLayout>
