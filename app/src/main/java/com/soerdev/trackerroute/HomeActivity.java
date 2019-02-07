@@ -329,10 +329,10 @@ public class HomeActivity extends AppCompatActivity {
                 Date currentDate = Calendar.getInstance().getTime();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
                 SimpleDateFormat formatWaktu = new SimpleDateFormat("HH:mm:ss");
+                SimpleDateFormat formatBulan = new SimpleDateFormat("MM-yyyy");
+                String bulanTahun = formatBulan.format(currentDate);
                 String tanggal = simpleDateFormat.format(currentDate);
                 String waktuAwal = formatWaktu.format(currentDate);
-
-
 
                 String nol = Integer.toString(0);
                 Map<String, String> params = new HashMap<String, String>();
