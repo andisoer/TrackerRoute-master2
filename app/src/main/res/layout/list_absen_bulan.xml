@@ -51,8 +51,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Awal : 0.2002.02.0.2"/>
-
-
+        
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/awalKoordinatBulan"
+            android:layout_width="50dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/akhirKoordinatBulan"
+            android:layout_width="50dp"
+            android:layout_height="20dp" />
+
+    </LinearLayout>
+    
 </LinearLayout>

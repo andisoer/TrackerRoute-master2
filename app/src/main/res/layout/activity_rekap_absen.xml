@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".RekapAbsenActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -31,17 +37,20 @@
     <TextView
         android:id="@+id/testKoordinat"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/awalTestKoordinat"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/akhirTestKoordinat"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="invisible"/>
 
     <!--
     <TextView
@@ -60,11 +69,6 @@
         android:layout_marginStart="4dp"
         android:textSize="15sp" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_rl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <ListView
             android:id="@+id/listAbsenRV"
             android:layout_width="match_parent"
@@ -72,18 +76,23 @@
 
         </ListView>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@color/colorPrimary"
-        android:padding="2dp"/>
+        android:padding="2dp">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_rekap_bulan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/bulanIni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:textSize="15sp"
+            android:text="Rekapan Untuk Bulan Ini :"/>
 
         <ListView
             android:id="@+id/listRekapBulanAbsen"
@@ -92,6 +101,6 @@
 
         </ListView>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
 
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

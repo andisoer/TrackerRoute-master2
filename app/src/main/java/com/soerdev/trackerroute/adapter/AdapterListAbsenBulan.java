@@ -55,6 +55,8 @@ public class AdapterListAbsenBulan extends BaseAdapter {
         TextView tanggalAbsen = (TextView)view.findViewById(R.id.tanggalAbsen_Bulanan);
         TextView awalWaktu = (TextView)view.findViewById(R.id.awalWaktuAbsen_Bulanan);
         TextView akhirWaktu = (TextView)view.findViewById(R.id.akhirWaktuAbsen_Bulanan);
+        TextView awalKoordinatBulan = (TextView)view.findViewById(R.id.awalKoordinatBulan);
+        TextView akhirKoordinatBulan = (TextView)view.findViewById(R.id.akhirKoordinatBulan);
 
         ModelListAbsenBulan modelListAbsenBulan = data.get(position);
 
@@ -62,6 +64,8 @@ public class AdapterListAbsenBulan extends BaseAdapter {
         tanggalAbsen.setText(modelListAbsenBulan.getDate());
         awalWaktu.setText("Waktu Masuk : "+modelListAbsenBulan.getWaktu_awal());
         akhirWaktu.setText("Waktu Akhir : "+modelListAbsenBulan.getWaktu_akhir());
+        awalKoordinatBulan.setText(modelListAbsenBulan.getAwal());
+        akhirKoordinatBulan.setText(modelListAbsenBulan.getAkhir());
 
         return view;
     }

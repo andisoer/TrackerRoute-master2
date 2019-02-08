@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,21 +18,19 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.soerdev.trackerroute.adapter.AdapterAbsenList;
+import com.soerdev.trackerroute.adapter.AdapterListAbsenBulan;
 import com.soerdev.trackerroute.app.AppController;
-import com.soerdev.trackerroute.model.ModelKoordinat;
 import com.soerdev.trackerroute.model.ModelListAbsen;
+import com.soerdev.trackerroute.model.ModelListAbsenBulan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,15 +43,17 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
 
     SharedPreferences sharedPreferences;
 
-    List<ModelListAbsen> listAbsen = new ArrayList<ModelListAbsen>();
+    List<ModelListAbsenBulan> modelListAbsenBulan = new ArrayList<ModelListAbsenBulan>();
+    List<ModelListAbsen> modelListAbsen = new ArrayList<ModelListAbsen>();
     //List<ModelKoordinat> listKoordinat = new ArrayList<ModelKoordinat>();
 
     List<String> arrayKoordinat = new ArrayList<String>();
 
     AdapterAbsenList adapter;
-    Context context;
+    AdapterListAbsenBulan adapterListAbsenBulan;
 
     private ListView listView;
+    private ListView listViewBulan;
 
     private String varUsernameNow;
     private String caritanggal;
@@ -78,9 +77,11 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
     private String WAKTU_KELUAR = "pklakhir";
     private String TAG_WAKTU_AWAL = "waktu_awal";
     private String TAG_WAKTU_AKHIR = "waktu_akhir";
+    private String TAG_BULAN_TAHUN = "bln_taun";
 
     private String URL_POST_USERNAME = "https://sembarangsims.000webhostapp.com/backSims/select_absensi.php";
     private String URL_GET_KORDINAT = "https://sembarangsims.000webhostapp.com/backSims/select_koordinat.php";
+    private String URL_POST_BULAN = "https://sembarangsims.000webhostapp.com/backSims/select_absensi2.php";
 
     private String TAG_SUCCESS = "success";
     private String TAG_MESSAGE = "message";
@@ -127,9 +128,15 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
 
         refreshLayout = findViewById(R.id.swipe_rl);
 
+        //List Absen Hari Ini
         listView = findViewById(R.id.listAbsenRV);
-        adapter = new AdapterAbsenList(RekapAbsenActivity.this, listAbsen);
+        adapter = new AdapterAbsenList(RekapAbsenActivity.this, modelListAbsen);
         listView.setAdapter(adapter);
+
+        //List Absen Bulanan
+        listViewBulan = findViewById(R.id.listRekapBulanAbsen);
+        adapterListAbsenBulan = new AdapterListAbsenBulan(RekapAbsenActivity.this, modelListAbsenBulan);
+        listViewBulan.setAdapter(adapterListAbsenBulan);
 
         refreshLayout.setOnRefreshListener(this);
 
@@ -137,18 +144,27 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
             @Override
             public void run() {
                 refreshLayout.setRefreshing(true);
-                listAbsen.clear();
+
+                //Model
+                modelListAbsen.clear();
+                modelListAbsenBulan.clear();
+
+                //Adapter
                 adapter.notifyDataSetChanged();
+                adapterListAbsenBulan.notifyDataSetChanged();
+
+                //Call Method
                 postUsername();
+                postBulanan();
             }
         });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String kodeUnik = listAbsen.get(position).getKodeUnik();
-                String koordinatAwal = listAbsen.get(position).getAwal();
-                String koordinatAkhir = listAbsen.get(position).getAkhir();
+                String kodeUnik = modelListAbsen.get(position).getKodeUnik();
+                String koordinatAwal = modelListAbsen.get(position).getAwal();
+                String koordinatAkhir = modelListAbsen.get(position).getAkhir();
 
                 awalTestKoordinat.setText("");
                 akhirTestKoordinat.setText("");
@@ -158,8 +174,6 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
                 intenMapKoordinat(kodeUnik, koordinatAwal, koordinatAkhir);
             }
         });
-
-        //TODO: Tampil Daftar Rekapan Bulanan Sesuai Tanggal Yang Dipilih
     }
 
     private void intenMapKoordinat(String kodeUnik, String koordinatAwal, String koordinatAkhir) {
@@ -296,12 +310,14 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
                             ModelListAbsen item = new ModelListAbsen();
 
                             item.setUsername(obj.getString(TAG_USERNAME));
+                            item.setAwal(obj.getString(TAG_KOORDINAT_AWAL));
+                            item.setAwal(obj.getString(TAG_KOORDINAT_AKHIR));
                             item.setWaktu_awal(obj.getString(TAG_WAKTU_AWAL));
                             item.setWaktu_akhir(obj.getString(TAG_WAKTU_AKHIR));
                             item.setDate(obj.getString(TAG_DATE));
                             item.setKodeUnik(obj.getString(TAG_UNIQUE_CODE));
 
-                            listAbsen.add(item);
+                            modelListAbsen.add(item);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(RekapAbsenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -340,11 +356,80 @@ public class RekapAbsenActivity extends AppCompatActivity implements SwipeRefres
         AppController.getInstance().addToRequestQueue(stringRequest);
     }
 
+    private void postBulanan(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_POST_BULAN, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG, response);
+
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        try {
+
+                            JSONObject obj = jsonArray.getJSONObject(i);
+
+                            ModelListAbsenBulan data = new ModelListAbsenBulan();
+
+                            data.setUsername(obj.getString(TAG_USERNAME));
+                            data.setWaktu_awal(obj.getString(TAG_WAKTU_AWAL));
+                            data.setWaktu_akhir(obj.getString(TAG_WAKTU_AKHIR));
+                            data.setAwal(obj.getString(TAG_KOORDINAT_AWAL));
+                            data.setAkhir(obj.getString(TAG_KOORDINAT_AKHIR));
+                            data.setDate(obj.getString(TAG_DATE));
+
+                            modelListAbsenBulan.add(data);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(RekapAbsenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    adapterListAbsenBulan.notifyDataSetChanged();
+                    refreshLayout.setRefreshing(false);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(RekapAbsenActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, error.getMessage());
+                Toast.makeText(RekapAbsenActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String>getParams(){
+                Date currentDate = Calendar.getInstance().getTime();
+                SimpleDateFormat formatBulan = new SimpleDateFormat("MM-yyyy");
+                String bulanIni = formatBulan.format(currentDate);
+
+                Map<String, String>params = new HashMap<String, String>();
+
+                params.put(TAG_BULAN_TAHUN, bulanIni);
+                params.put(TAG_nama, varUsernameNow);
+
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest);
+    }
+
     @Override
     public void onRefresh() {
-        listAbsen.clear();
+        //Model
+        modelListAbsen.clear();
+        modelListAbsenBulan.clear();
+
+        //Adapter
         adapter.notifyDataSetChanged();
+        adapterListAbsenBulan.notifyDataSetChanged();
+
+        //Call Method
         postUsername();
+        postBulanan();
     }
 
 }

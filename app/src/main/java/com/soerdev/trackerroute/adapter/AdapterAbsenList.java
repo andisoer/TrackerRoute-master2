@@ -44,6 +44,7 @@ public class AdapterAbsenList extends BaseAdapter {
         if(layoutInflater == null){
             layoutInflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
+
         if(view == null){
             view = layoutInflater.inflate(R.layout.list_absen, null);
         }
