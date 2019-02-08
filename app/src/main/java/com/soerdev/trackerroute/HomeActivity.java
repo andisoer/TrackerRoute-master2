@@ -74,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
     private String WAKTU_MASUK = "pklawal";
     private String WAKTU_KELUAR = "pklakhir";
     private String TAG_LINK_FOTO = "link_foto";
-
+    private String TAG_BULAN = "bln_taun";
     private String TAG = HomeActivity.class.getSimpleName();
     private String counterTime;
 
@@ -346,6 +346,7 @@ public class HomeActivity extends AppCompatActivity {
                 params.put(TAG_WAKTU, tanggal);
                 params.put(WAKTU_MASUK, waktuAwal);
                 params.put(WAKTU_KELUAR, nol);
+                params.put(TAG_BULAN, bulanTahun);
                 Log.e(TAG, ""+params);
 
                 return params;
