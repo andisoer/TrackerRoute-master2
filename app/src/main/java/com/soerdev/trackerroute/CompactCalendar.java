@@ -41,7 +41,6 @@ import java.util.Map;
 public class CompactCalendar extends AppCompatActivity {
 
     TextView currentMonth;
-    Button pilihTanggalKalendar;
 
     SharedPreferences sharedPreferences;
 
@@ -74,8 +73,6 @@ public class CompactCalendar extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        pilihTanggalKalendar = findViewById(R.id.pilihTanggalCalendar);
-
         sharedPreferences = getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
 
         varUsernameNow = (sharedPreferences.getString(TAG_username, ""));
@@ -92,6 +89,9 @@ public class CompactCalendar extends AppCompatActivity {
             public void onDayClick(Date dateClicked) {
                 onClickTanggalCalendar = SDFonClickDay.format(dateClicked);
                 Toast.makeText(CompactCalendar.this, onClickTanggalCalendar, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CompactCalendar.this, RekapAbsenActivity.class);
+                intent.putExtra("cari", onClickTanggalCalendar);
+                startActivity(intent);
             }
 
             @Override
@@ -100,14 +100,6 @@ public class CompactCalendar extends AppCompatActivity {
             }
         });
 
-        pilihTanggalKalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CompactCalendar.this, RekapAbsenActivity.class);
-                intent.putExtra("cari", onClickTanggalCalendar);
-                startActivity(intent);
-            }
-        });
 
         loadDatafromDatabase();
 
