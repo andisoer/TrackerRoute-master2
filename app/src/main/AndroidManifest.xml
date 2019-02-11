@@ -55,7 +55,8 @@
             android:name=".CekKoordinat"
             android:parentActivityName=".RekapAbsenActivity" />
         <activity android:name=".CalendarAbsen" />
-        <activity android:name=".CompactCalendar"></activity>
+        <activity android:name=".CompactCalendar"
+            android:parentActivityName=".HomeActivity"></activity>
     </application>
 
 </manifest>

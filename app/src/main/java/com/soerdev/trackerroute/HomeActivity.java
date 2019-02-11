@@ -22,6 +22,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -55,7 +56,7 @@ import java.util.Map;
 public class HomeActivity extends AppCompatActivity {
 
     private ImageView imageUser;
-    private Button absenIn, absenOut, rekap;
+    private CardView absenIn, absenOut, rekap;
     private TextView counter, namaUser;
 
     private String TAG_ID = "id";
@@ -210,6 +211,7 @@ public class HomeActivity extends AppCompatActivity {
                         //disabledBtn();
                         absenOut.setClickable(false);
                         absenOut.setEnabled(false);
+                        absenOut.setBackgroundColor(getResources().getColor(R.color.colorGrey));
                         count = 61;
 
                     } else {
@@ -359,6 +361,8 @@ public class HomeActivity extends AppCompatActivity {
         if(btnabsenIn == 1){
             absenIn.setEnabled(false);
             absenIn.setClickable(false);
+            absenIn.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+            absenOut.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             absenOut.setEnabled(true);
             absenOut.setClickable(true);
         }else{
@@ -366,6 +370,7 @@ public class HomeActivity extends AppCompatActivity {
             absenIn.setClickable(true);
             absenOut.setEnabled(false);
             absenOut.setClickable(false);
+            absenOut.setBackgroundColor(getResources().getColor(R.color.colorGrey));
         }
     }
 

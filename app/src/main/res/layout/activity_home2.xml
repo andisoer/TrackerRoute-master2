@@ -5,94 +5,183 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeActivity"
-    android:background="@drawable/home_bg">
+    android:background="@color/colorGreyBackground">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_action_person"
-        android:scaleType="centerCrop"
-        app:civ_border_color="@android:color/white"
-        app:civ_border_width="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:id="@+id/relativeLayoutHeader"
+        android:background="@drawable/gradientbluebackground"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:elevation="4dp">
 
-    <TextView
-        android:id="@+id/userNameHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Nama User"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/ic_action_person"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/userNameHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Nama User"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
         android:id="@+id/absenIn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:text="Absen"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/absenOut"
+        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/counter" />
+        app:layout_constraintTop_toBottomOf="@+id/counter">
 
-    <Button
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/absenInIMG"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/enter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/absenInIMG"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="Absen" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
         android:id="@+id/absenOut"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimary"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:text="Keluar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/absenIn" />
+        app:layout_constraintStart_toEndOf="@+id/absenIn"
+        app:layout_constraintTop_toBottomOf="@+id/counter">
 
-    <Button
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/absenOutIMG"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/exit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/absenOutIMG"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="Keluar" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
         android:id="@+id/rekap"
-        android:layout_width="wrap_content"
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
-        android:background="@color/colorPrimaryDark"
-        android:paddingLeft="60dp"
-        android:paddingRight="60dp"
-        android:text="Rekapan Absen"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/absenOut"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/absenOut">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <TextView
+                    android:id="@+id/rekapAbsenText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Rekapan Absen" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/rekapAbsenText"
+                    android:layout_toRightOf="@id/rekapAbsenText"
+                    android:src="@drawable/calendar" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
 
     <TextView
         android:id="@+id/counter"
@@ -103,9 +192,10 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="0"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameHome"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayoutHeader"
         android:textColor="#ffffff"/>
 
 </android.support.constraint.ConstraintLayout>
